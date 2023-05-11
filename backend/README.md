@@ -15,6 +15,7 @@ in this file you must following this steps to create the environment that help y
   
   - if you use any frontend framework and facing a Cros-Origin Resources Sharing run this command
     - 'pip install django-cors-headers'
+    
     - then gro to settings.py locate the MIDDLEWARE list and add the following line to it:
       MIDDLEWARE = [
         \# Other middleware classes...
