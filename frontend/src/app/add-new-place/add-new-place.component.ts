@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PlacesService } from '../shared/services/places.service';
 
 @Component({
   selector: 'app-add-new-place',
@@ -9,8 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddNewPlaceComponent {
   infoForm: FormGroup;
+  message: string;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(private placeService: PlacesService, private fb: FormBuilder) {
+    this.message = '';
     this.infoForm = this.fb.group({
       name: ['', Validators.required],
       latitude: ['', Validators.required],
@@ -20,15 +22,18 @@ export class AddNewPlaceComponent {
 
   addNewPlace() {
     if (this.infoForm.valid) {
-      this.http
-        .post('http://localhost:8000/api/places/', this.infoForm.value)
-        .subscribe((response) => {
-          this.infoForm.setValue({
-            name: '',
-            latitude: '',
-            longitude: '',
-          });
+      this.placeService.addPlace(this.infoForm.value).subscribe((response) => {
+        this.message = 'data added successfully!';
+        this.infoForm.setValue({
+          name: '',
+          latitude: '',
+          longitude: '',
         });
+      });
+
+      setTimeout(() => {
+        this.message = '';
+      }, 5000);
     }
   }
 }
