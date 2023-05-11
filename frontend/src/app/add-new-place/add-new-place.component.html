@@ -1,0 +1,24 @@
+<form class="w-50 mx-auto" (submit)="addNewPlace()" [formGroup]="infoForm">
+  <div class="mb-3">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" formControlName="name" />
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="latitude">Latitude</label>
+        <input type="text" class="form-control" id="latitude" formControlName="latitude" />
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="mb-3">
+        <label for="longitude">Longitude</label>
+        <input type="text" class="form-control" id="longitude" formControlName="longitude" />
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
